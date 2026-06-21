@@ -7,6 +7,7 @@ def get_range_for_difficulty(difficulty: str):
     if difficulty == "Normal":
         return 1, 100
     if difficulty == "Hard":
+        #FIXME: Range should be higher for hard
         return 1, 50
     return 1, 100
 
@@ -18,6 +19,7 @@ def parse_guess(raw: str):
     if raw == "":
         return False, None, "Enter a guess."
 
+    #FIXME: No range validation for guesses out of range
     try:
         if "." in raw:
             value = int(float(raw))
