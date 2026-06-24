@@ -49,6 +49,12 @@ Describe your fixed game in numbered steps so a reader can follow along without 
 # ========================= X passed in 0.XXs =========================
 ```
 
+collected 34 items
+
+tests/test_game_logic.py .................................. [100%]
+
+============================== 34 passed in 0.02s ==============================
+
 ## 🚀 Stretch Features
 
 - [ ] [If you choose to complete Challenge 4, describe the Enhanced UI changes here — a screenshot is optional]
