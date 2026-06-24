@@ -38,8 +38,9 @@ Document at least 3 bugs you found. Add rows as needed.
 - Which AI tools did you use on this project (for example: ChatGPT, Gemini, Copilot)?
   - I used Claude Code AI tool for this project
 - Give one example of an AI suggestion that was correct (including what the AI suggested and how you verified the result).
+  - One example in which the AI suggestion that was correct was when it said that there was no range validation in parse_guess function. This is correct because I was able to enter 0 as an input, which resulted in a hint that was incorrect. There should have been logic to check if the input is in the range of the difficulty set.I verified this result by inputting in parameters and returned an error/alert if the input is out of the range of the parameters.
 - Give one example of an AI suggestion that was incorrect or misleading (including what the AI suggested and how you verified the result).
-  - One example of the AI suggestion that I thought was incorrect or misleading was when looking at the app.py, the AI suggested to delete the four function definitions at the top and to add
+  - One example of the AI suggestion that I thought was incorrect or misleading was when reviewing the error for the range validation, the AI never once mentioned the other half of that error. It never mentioned to fix or to evaluate the number of attempts that would decrease even with an invalid number guess. In testing, I found the number of attempts to be decreasing, even when I guessed a number that is too low or high for the range and when it gave me an alert saying so. This allowed me to think for myself and adjust the code accordingly.
 
 ---
 
