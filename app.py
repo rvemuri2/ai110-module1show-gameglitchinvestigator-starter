@@ -49,6 +49,9 @@ if st.session_state.get("difficulty") != difficulty:
 
 st.subheader("Make a guess")
 
+# FIX: Moved the text input and buttons up here, ABOVE the info box and debug
+# expander, so that the submit handler can run before anything that displays
+# attempts/score/history gets rendered.
 raw_guess = st.text_input(
     "Enter your guess:",
     key=f"guess_input_{difficulty}",
@@ -62,14 +65,18 @@ with col2:
 with col3:
     show_hint = st.checkbox("Show hint", value=True)
 
-# Handle New Game first.
+# FIX: Handle "New Game" before processing a submit, so a stale submit click
+# doesn't get processed against a freshly reset game state.
 if new_game:
     reset_game(low, high)
     st.session_state.difficulty = difficulty
     st.success("New game started.")
     st.rerun()
 
-# --- Process the submit BEFORE rendering anything that depends on state. ---
+# FIX: This entire submit-handling block was moved UP from the bottom of the
+# file. The original bug was that attempts/score/history were rendered before
+# this block mutated them, so the UI showed stale values for one rerun cycle.
+# Now state is updated BEFORE anything reads it.
 submit_error = None
 hint_message = None
 win_message = None
@@ -110,13 +117,15 @@ if submit and st.session_state.status == "playing":
                 f"Score: {st.session_state.score}"
             )
 
-# --- Now render using up-to-date state. ---
-
+# FIX: Info box now renders AFTER the submit handler, so "Attempts left"
+# reflects the guess that was just submitted.
 st.info(
     f"Guess a number between {low} and {high}. "
     f"Attempts left: {attempt_limit - st.session_state.attempts}"
 )
 
+# FIX: Debug expander also moved below the submit handler so attempts/score/
+# history shown here are current, not stale by one rerun.
 with st.expander("Developer Debug Info"):
     st.write("Secret:", st.session_state.secret)
     st.write("Attempts:", st.session_state.attempts)
@@ -124,7 +133,9 @@ with st.expander("Developer Debug Info"):
     st.write("Difficulty:", difficulty)
     st.write("History:", st.session_state.history)
 
-# Show feedback from this run.
+# FIX: Feedback messages (error, hint, balloons, win/lose) are deferred into
+# local variables above and rendered here, so they appear alongside the
+# freshly updated numbers instead of next to stale ones.
 if submit_error:
     st.error(submit_error)
 if hint_message:
@@ -136,7 +147,9 @@ if win_message:
 if lose_message:
     st.error(lose_message)
 
-# Game-over guard (runs after the current guess has been processed).
+# FIX: Game-over guard now checks "not (did_win or lose_message)" so the
+# winning/losing message from the CURRENT guess still shows on this rerun.
+# Originally, st.stop() would have swallowed it.
 if st.session_state.status != "playing" and not (did_win or lose_message):
     if st.session_state.status == "won":
         st.success("You already won. Start a new game to play again.")

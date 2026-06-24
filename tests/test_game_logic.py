@@ -12,26 +12,35 @@ from logic_utils import (
 # ---------- check_guess ----------
 
 def test_winning_guess():
+    # FIX: check_guess returns a tuple (outcome, message), not a string.
+    # The original `assert result == "Win"` was comparing a tuple to a
+    # string, which is always False — the test would have failed if run.
     outcome, _ = check_guess(50, 50)
     assert outcome == "Win"
 
 def test_guess_too_high():
+    # FIX: same tuple-unpacking issue as above.
     outcome, _ = check_guess(60, 50)
     assert outcome == "Too High"
 
 def test_guess_too_low():
+    # FIX: same tuple-unpacking issue as above.
     outcome, _ = check_guess(40, 50)
     assert outcome == "Too Low"
 
+# NEW: Confirms the message half of the tuple is a non-empty string,
+# since the UI relies on it for the hint text.
 def test_check_guess_returns_message():
     _, message = check_guess(50, 50)
     assert isinstance(message, str) and message != ""
 
+# NEW: Off-by-one boundary check around the secret.
 def test_check_guess_boundary_off_by_one():
     assert check_guess(51, 50)[0] == "Too High"
     assert check_guess(49, 50)[0] == "Too Low"
 
 
+# NEW SECTION: get_range_for_difficulty was completely untested before.
 # ---------- get_range_for_difficulty ----------
 
 def test_range_easy():
@@ -47,6 +56,7 @@ def test_range_unknown_defaults_to_normal():
     assert get_range_for_difficulty("Impossible") == (1, 100)
 
 
+# NEW SECTION: get_attempt_limit was completely untested before.
 # ---------- get_attempt_limit ----------
 
 def test_attempts_easy():
@@ -62,6 +72,7 @@ def test_attempts_unknown_defaults_to_eight():
     assert get_attempt_limit("Nightmare") == 8
 
 
+# NEW SECTION: parse_guess was completely untested before.
 # ---------- parse_guess ----------
 
 def test_parse_guess_valid():
@@ -128,6 +139,7 @@ def test_parse_guess_negative_number():
     assert err is not None
 
 
+# NEW SECTION: update_score was completely untested before.
 # ---------- update_score ----------
 
 def test_score_win_first_attempt():
@@ -139,11 +151,11 @@ def test_score_win_second_attempt():
     assert update_score(0, "Win", 2) == 90
 
 def test_score_win_floor_is_ten():
-    # On attempt 20, raw would be 100 - 190 = -90, but floor is 10
+    # On attempt 20, raw would be -90, but floor clamps to 10.
     assert update_score(0, "Win", 20) == 10
 
 def test_score_win_at_floor_boundary():
-    # Attempt 10: 100 - 90 = 10 exactly
+    # Attempt 10: 100 - 90 = 10 exactly.
     assert update_score(0, "Win", 10) == 10
 
 def test_score_win_adds_to_existing_score():

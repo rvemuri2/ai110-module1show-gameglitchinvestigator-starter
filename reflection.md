@@ -59,6 +59,7 @@ Document at least 3 bugs you found. Add rows as needed.
 ## 4. What did you learn about Streamlit and state?
 
 - How would you explain Streamlit "reruns" and session state to a friend who has never used Streamlit?
+  - So, I learned how Streamlit "reruns" in that every time the user interacts with the application, Streamlit re-runs the entire Python script from top to bottom. In a normal app, there is no event handler system. In Streamlit, the whole script just runs again. So, that means that variables are reset and so that would mean scores would go back to 0 each time. That's why we have session states, so that there is a dictionary that survives in the re-runs, and the data is not lost even if the re run happens.
 
 ---
 
@@ -66,5 +67,11 @@ Document at least 3 bugs you found. Add rows as needed.
 
 - What is one habit or strategy from this project that you want to reuse in future labs or projects?
   - This could be a testing habit, a prompting strategy, or a way you used Git.
+
+  - I think one habit or strategy I would use from this project in future labs or projects is taking time to go through all the edge cases of testing (in this case manually) before I start to even look at the code. I think looking at logs and understanding errors is critical for any developer. I want to get in the habit of Test driven development (TDD) as that is the best way to diagnose problems and efficiently solve problems.
+
 - What is one thing you would do differently next time you work with AI on a coding task?
+  - Next time, I should not just tell the AI to refactor the entire file, rather focus on individual pieces and then test individual piece/section. I know that this is slower to test, but would be more accurate. In this project, the code was simple, but next time the project could be more complex. It would be also easier to follow for me, the developer, and it is easier to be able to fix any mistakes.
+
 - In one or two sentences, describe how this project changed the way you think about AI generated code.
+  - The project really changed how I see the quality of code the AI has generated in that the AI has been very accurate and even thinks of test cases that may have missed my eye. The AI is also really good at documentation in explaining the changes and why that change should be there.
