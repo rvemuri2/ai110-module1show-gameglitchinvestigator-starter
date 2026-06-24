@@ -10,27 +10,25 @@
 
 **What task did you give the agent?**
 
-<!-- Describe the goal you asked the agent to accomplish -->
+I tasked the agent to refactor the code for app.py by using the logic_utils.py. I also tasked it to make changes to update test cases.
 
 **What did the agent do?**
 
-<!-- List the steps the agent took (files edited, commands run, etc.) -->
+The agent was able to refactor the codebase for app.py, importing in logic_utils.py. It documented where the changes were made and explained how the changes were made. The agent also created test cases, telling me the edge cases that it considered.
 
 **What did you have to verify or fix manually?**
 
-<!-- Describe anything the agent got wrong or that required human review -->
-
----
+## I had to verify the whole updating history part in time, as that did not work properly. I had to make some fixes to that part, but then also used the AI to verify fixes and then made the AI do it better. I verified that change manually by playing through several iterations of the game and making sure that it was working properly.
 
 ## Test Generation (SF7)
 
 > Document how you used AI to help generate or improve tests.
 
 | Edge Case | Prompt Used | AI-Suggested Test | Did It Pass? | Your Reasoning |
-|-----------|-------------|-------------------|--------------|----------------|
-| | | | | |
-| | | | | |
-| | | | | |
+| --------- | ----------- | ----------------- | ------------ | -------------- |
+|           |             |                   |              |                |
+|           |             |                   |              |                |
+|           |             |                   |              |                |
 
 ---
 
@@ -64,12 +62,12 @@
 
 <!-- Describe what you asked each model to do -->
 
-| | Model A | Model B |
-|-|---------|---------|
-| **Model name** | | |
-| **Response summary** | | |
-| **More Pythonic?** | | |
-| **Clearer explanation?** | | |
+|                          | Model A | Model B |
+| ------------------------ | ------- | ------- |
+| **Model name**           |         |         |
+| **Response summary**     |         |         |
+| **More Pythonic?**       |         |         |
+| **Clearer explanation?** |         |         |
 
 **Which did you prefer and why?**
 
