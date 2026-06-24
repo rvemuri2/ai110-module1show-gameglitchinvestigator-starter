@@ -47,9 +47,12 @@ Document at least 3 bugs you found. Add rows as needed.
 ## 3. Debugging and testing your fixes
 
 - How did you decide whether a bug was really fixed?
+  - I decided that a bug was really fixed by testing all the edge cases of the feature manually and then also making a test case for it in test_game_logic.py. I had to test over and over again depending on the bug, but the most important thing was to come up with a list of edge cases. That way, there won't be anything missed in the testing and then having similar cases in the testing code makes it reliable.
 - Describe at least one test you ran (manual or using pytest)  
   and what it showed you about your code.
+  - One test I ran manually was seeing how the history is updating in real time after the user attempts a valid guess. The bug was actually how I was ordering the code, and that I needed to move some sections of the code. I learned that Streamlit re runs the script top to bottom on every click, and in app.py, initially, the history, score, and attempts were rendered before the submit handler running, so UI draws old values, so it needed to be moved.
 - Did AI help you design or understand any tests? How?
+  - Yeah, the AI helped me to design the tests, and understand that some existing tests were not working properly. In the code, check_guess returns a tuple, but the initial test asserted a result with just a string. So, the AI helped me to catch that with the updated code, so that test was able to be modified correctly.
 
 ---
 
